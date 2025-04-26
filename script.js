@@ -7,7 +7,7 @@ autoclick = 0
 
 function autocliker(){
 	money += autoclick
-	$('.money__num').text(money)
+	reset_money()
 }
 setInterval(autocliker, 1000);
 
@@ -15,7 +15,7 @@ function auto(){
 	if(money>=10){
 	autoclick += 1
 	money -= 10
-	$('.money__num').text(money)
+	reset_money()
 	}else{
 		alert("Денег недостаточно")
 	}
@@ -36,7 +36,7 @@ levels={
 $('.personage').on('click',function(){
 	money += price_click
 	progress += 1
-	$('.money__num').text(money)
+		reset_money()
 	if(progress == levels[level]["click"]){
 		level+= 1
 	    progress = 0
@@ -45,11 +45,27 @@ $('.personage').on('click',function(){
 	}
 	$('.level__progress').css({"width":progress/levels[level]["click"]*100+"%"})
 })
+
+function reset_money(){
+	if (money<1000){
+		$('.money__num').text(money)
+	}
+	if (money>=1000 && money < 1000000){
+		$('.money__num').text( Math.floor(money / 1000)+' тыс.')
+	}
+	if (money>=1000000 && money < 1000000000){
+		$('.money__num').text( Math.floor(money / 1000000)+' мил.')
+	}
+	if (money>=1000000000 && money < 1000000000000){
+		$('.money__num').text( Math.floor(money / 1000000000)+' миллиард.')
+	}
+}
+
 function money_plus_1(){
 	if(money>=50){
 	price_click += 1
 	money -= 50
-	$('.money__num').text(money)
+	reset_money()
 	}else{
 		alert("Денег недостаточно")
 	}
@@ -59,7 +75,7 @@ function money_x_2(){
 	if(money>=0){
 	price_click *= 2
 	money -= 1500
-	$('.money__num').text(money)
+	reset_money()
 	}else{
 		alert("Денег недостаточно")
 	}
@@ -69,7 +85,7 @@ function money_plus_5(){
 	if(money>=50){
 	price_click += 5
 	money -= 100
-	$('.money__num').text(money)
+	reset_money()
 	}else{
 		alert("Денег недостаточно")
 	}
@@ -79,7 +95,7 @@ function money_plus_10(){
 	if(money>=50){
 	price_click += 10
 	money -= 250
-	$('.money__num').text(money)
+	reset_money()
 	}else{
 		alert("Денег недостаточно")
 	}
@@ -89,7 +105,7 @@ function money_plus_30(){
 	if(money>=50){
 	price_click += 30
 	money -= 500
-	$('.money__num').text(money)
+	reset_money()
 	}else{
 		alert("Денег недостаточно")
 	}
@@ -99,7 +115,7 @@ function money_plus_50(){
 	if(money>=50){
 	price_click += 50
 	money -= 1000
-	$('.money__num').text(money)
+	reset_money()
 	}else{
 		alert("Денег недостаточно")
 	}
